@@ -4,11 +4,12 @@ import CardList from "../CardList/CardList";
 import IArtwork from "../../types/IArtwork";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import Loader from "../Loader";
+import getLocalStorage from "../../utils/getLocalStorage";
 
 const FavoriteList = () => {
   const [artworks, setArtworks] = useState<IArtwork[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [favorites] = useLocalStorage<number[]>("favorites", []);
+  const favorites = getLocalStorage("favorites", []);
 
   useEffect(() => {
     fetch(`https://api.artic.edu/api/v1/artworks?ids=${favorites.join(", ")}`)

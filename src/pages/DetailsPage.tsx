@@ -4,7 +4,7 @@ import Details from "../components/Details/Details";
 
 const DetailsPage = () => {
   const { id }: { id?: number } = useParams();
-  return <div>{id && <Details id={id} />}</div>;
+  return <div>{id && <Details id={Number(id)} />}</div>;
 };
 
 export default DetailsPage;
