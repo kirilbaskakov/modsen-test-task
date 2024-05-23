@@ -5,6 +5,7 @@ import Loader from "../Loader";
 const Wrapper = styled.div`
   width: 100%;
   aspect-ratio: 1;
+  position: relative;
 `;
 
 const Image = styled.img<{ loading: boolean }>`
@@ -12,6 +13,7 @@ const Image = styled.img<{ loading: boolean }>`
   aspect-ratio: 1;
   width: 100%;
 `;
+
 const LoadingImage = ({ image_id }: { image_id: string | undefined }) => {
   const [isLoading, setIsLoading] = useState(true);
 
