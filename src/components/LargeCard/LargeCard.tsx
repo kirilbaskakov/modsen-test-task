@@ -1,21 +1,14 @@
 import React from "react";
 import CardDescription from "../CardDescription/CardDescription";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-
-interface Props {
-  title: string;
-  author: string;
-  img: string;
-}
+import { Link } from "react-router-dom";
+import IArtwork from "../../types/IArtwork";
+import LoadingImage from "../LoadingImage/LoadingImage";
 
 const CardWrapper = styled.div`
   width: 100%;
   cursor: pointer;
-`;
-
-const Image = styled.img`
-  width: 100%;
+  min-width: 0;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -24,14 +17,14 @@ const DescriptionWrapper = styled.div`
   padding: 1rem;
 `;
 
-const LargeCard = ({ title, author, img }: Props) => {
-  const navigate = useNavigate();
-
+const LargeCard = ({ artwork }: { artwork: IArtwork }) => {
   return (
     <CardWrapper>
-      <Image src={img} onClick={() => navigate("/details/1")} />
+      <Link to={`/details/${artwork.id}`}>
+        <LoadingImage image_id={artwork.image_id} />
+      </Link>
       <DescriptionWrapper>
-        <CardDescription title={title} author={author} />
+        <CardDescription artwork={artwork} withImage={false} />
       </DescriptionWrapper>
     </CardWrapper>
   );

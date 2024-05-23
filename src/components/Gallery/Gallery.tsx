@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import LargeCard from "../LargeCard/LargeCard";
 import TitledBlock from "../TitledBlock/TitledBlock";
+import IArtwork from "../../types/IArtwork";
+import App from "../../App";
+import Loader from "../Loader";
+import Search from "../Search/Search";
+import useDebounce from "../../hooks/useDebounce";
 
 const Cards = styled.div`
   display: flex;
@@ -39,7 +44,11 @@ const PageArrow = styled(Page)`
 
 const Gallery = () => {
   const [page, setPage] = useState(1);
-  const maxPages = 10;
+  const [artworks, setArtworks] = useState<IArtwork[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const search = useDebounce(searchText, 300);
+  let maxPages = 100;
 
   const genPages = () => {
     let start = Math.max(1, page - 1);
@@ -57,48 +66,71 @@ const Gallery = () => {
 
   const pages = genPages();
 
+  const fetchArtworks = () => {
+    fetch(
+      search
+        ? `https://api.artic.edu/api/v1/artworks/search?q=${search}&page=${page}&limit=3&fields=id,image_id,title,artist_title`
+        : `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        maxPages = data.pagination.total_pages;
+        setArtworks(data.data);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  useEffect(() => {
+    if (page != 1) {
+      setPage(1);
+    } else {
+      fetchArtworks();
+    }
+  }, [search]);
+
+  useEffect(() => {
+    fetchArtworks();
+  }, [page]);
+
   return (
-    <TitledBlock title="Our special gallery" subtitle="Topics for you">
-      <Cards>
-        <LargeCard
-          title="Charles V"
-          author="Giovanni"
-          img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYjgP0Uoes2hbUVqWFPK4LFASUBRyhCBqJw&s"
-        />
-        <LargeCard
-          title="Charles V"
-          author="Giovanni"
-          img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYjgP0Uoes2hbUVqWFPK4LFASUBRyhCBqJw&s"
-        />
-        <LargeCard
-          title="Charles V"
-          author="Giovanni"
-          img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYjgP0Uoes2hbUVqWFPK4LFASUBRyhCBqJw&s"
-        />
-      </Cards>
-      <Pagination>
-        <PageArrow
-          className={page == 1 ? "hidden" : ""}
-          onClick={() => setPage((p) => p - 1)}
-        >
-          {"<"}
-        </PageArrow>
-        {pages.map((p) => (
-          <Page
-            className={p == page ? "selected" : ""}
-            onClick={() => setPage(p)}
-          >
-            {p}
-          </Page>
-        ))}
-        <PageArrow
-          className={page == maxPages ? "hidden" : ""}
-          onClick={() => setPage((p) => p + 1)}
-        >
-          {">"}
-        </PageArrow>
-      </Pagination>
-    </TitledBlock>
+    <>
+      <Search searchText={searchText} setSearchText={setSearchText} />
+      <TitledBlock title="Our special gallery" subtitle="Topics for you">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <Cards>
+              {artworks.map((artwork) => (
+                <LargeCard key={artwork.id} artwork={artwork} />
+              ))}
+            </Cards>
+            <Pagination>
+              <PageArrow
+                className={page == 1 ? "hidden" : ""}
+                onClick={() => setPage((p) => p - 1)}
+              >
+                {"<"}
+              </PageArrow>
+              {pages.map((p) => (
+                <Page
+                  className={p == page ? "selected" : ""}
+                  onClick={() => setPage(p)}
+                >
+                  {p}
+                </Page>
+              ))}
+              <PageArrow
+                className={page == maxPages ? "hidden" : ""}
+                onClick={() => setPage((p) => p + 1)}
+              >
+                {">"}
+              </PageArrow>
+            </Pagination>
+          </>
+        )}
+      </TitledBlock>
+    </>
   );
 };
 

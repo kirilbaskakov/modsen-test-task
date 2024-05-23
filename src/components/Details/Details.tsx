@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FavButton from "../FavButton/FavButton";
+import IArtwork from "../../types/IArtwork";
+import LoadingImage from "../LoadingImage/LoadingImage";
+import Loader from "../Loader";
 
 const DetailsWrapper = styled.div`
   position: relative;
@@ -11,6 +14,7 @@ const DetailsWrapper = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
+  width: 30vw;
 `;
 
 const Image = styled.img`
@@ -66,37 +70,60 @@ const Hightlighted = styled.span`
   color: #e0a449;
 `;
 
-const Details = () => {
+const Details = ({ id }: { id: number }) => {
+  const [artwork, setArtwork] = useState<IArtwork | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setArtwork(data.data);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
+
   return (
     <DetailsWrapper>
-      <ImageWrapper>
-        <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScYjgP0Uoes2hbUVqWFPK4LFASUBRyhCBqJw&s" />
-        <FavButtonWrapper>
-          <FavButton />
-        </FavButtonWrapper>
-      </ImageWrapper>
-      <div>
-        <Title>Charles V, bust length</Title>
-        <Author>Giovanni Britto</Author>
-        <Year>1535-45</Year>
-        <OverviewWrapper>
-          <Title>Overview</Title>
-          <OverviewList>
-            <OverviewItem>
-              <Hightlighted>Artist nationality:</Hightlighted> German
-            </OverviewItem>
-            <OverviewItem>
-              <Hightlighted>Dimensions Sheet:</Hightlighted> German
-            </OverviewItem>
-            <OverviewItem>
-              <Hightlighted>Credit Line:</Hightlighted> German
-            </OverviewItem>
-            <OverviewItem>
-              <Hightlighted>Repository:</Hightlighted> German
-            </OverviewItem>
-          </OverviewList>
-        </OverviewWrapper>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <ImageWrapper>
+            <LoadingImage image_id={artwork?.image_id} />
+            <FavButtonWrapper>
+              <FavButton id={id} />
+            </FavButtonWrapper>
+          </ImageWrapper>
+          <div>
+            <Title>{artwork?.title}</Title>
+            <Author>{artwork?.artist_title}</Author>
+            <Year>
+              {artwork?.date_start}-{artwork?.date_end}
+            </Year>
+            <OverviewWrapper>
+              <Title>Overview</Title>
+              <OverviewList>
+                <OverviewItem>
+                  <Hightlighted>Artist nationality:</Hightlighted> German
+                </OverviewItem>
+                <OverviewItem>
+                  <Hightlighted>Dimensions Sheet:</Hightlighted>{" "}
+                  {artwork?.dimensions}
+                </OverviewItem>
+                <OverviewItem>
+                  <Hightlighted>Credit Line:</Hightlighted>{" "}
+                  {artwork?.credit_line}
+                </OverviewItem>
+                <OverviewItem>
+                  <Hightlighted>Repository:</Hightlighted>{" "}
+                  {artwork?.credit_line}
+                </OverviewItem>
+              </OverviewList>
+            </OverviewWrapper>
+          </div>
+        </>
+      )}
     </DetailsWrapper>
   );
 };

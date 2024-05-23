@@ -1,10 +1,12 @@
 import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
-import Bookmark from "../../assets/bookmark.svg";
+import Bookmark from "../../assets/bookmark-orange.svg";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-const FavButtonStyled = styled.button`
+const FavButtonStyled = styled.button<{ selected?: boolean }>`
   cursor: pointer;
-  background-color: #f0f1f1;
+  background-color: ${(props) =>
+    props.selected ? "rgba(256, 230, 193)" : "#f0f1f1"};
   border-radius: 50%;
   border: none;
   width: 59px;
@@ -19,13 +21,21 @@ const FavButtonStyled = styled.button`
   }
 `;
 
-const FavButton = () => {
-  const toFavorite: MouseEventHandler = (e) => {
+const FavButton = ({ id }: { id: number }) => {
+  const [favorites, setFavorites] = useLocalStorage<number[]>("favorites", []);
+  const inFavorite = favorites.includes(id);
+
+  const onClick: MouseEventHandler = (e) => {
     e.stopPropagation();
+    if (inFavorite) {
+      setFavorites(favorites.filter((i) => i != id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
   };
 
   return (
-    <FavButtonStyled onClick={toFavorite}>
+    <FavButtonStyled onClick={onClick} selected={inFavorite}>
       <img src={Bookmark} />
     </FavButtonStyled>
   );
