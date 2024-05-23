@@ -7,6 +7,7 @@ import App from "../../App";
 import Loader from "../Loader";
 import Search from "../Search/Search";
 import useDebounce from "../../hooks/useDebounce";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const Cards = styled.div`
   display: flex;
@@ -47,6 +48,10 @@ const Gallery = () => {
   const [artworks, setArtworks] = useState<IArtwork[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
+  const windowWidth = useWindowWidth();
+  const [limit, setLimit] = useState(
+    windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3
+  );
   const search = useDebounce(searchText, 300);
   let maxPages = 100;
 
@@ -69,8 +74,8 @@ const Gallery = () => {
   const fetchArtworks = () => {
     fetch(
       search
-        ? `https://api.artic.edu/api/v1/artworks/search?q=${search}&page=${page}&limit=3&fields=id,image_id,title,artist_title`
-        : `https://api.artic.edu/api/v1/artworks?page=${page}&limit=3`
+        ? `https://api.artic.edu/api/v1/artworks/search?q=${search}&page=${page}&limit=${limit}&fields=id,image_id,title,artist_title`
+        : `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -79,6 +84,17 @@ const Gallery = () => {
       })
       .finally(() => setIsLoading(false));
   };
+
+  useEffect(() => {
+    const newLimit = windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3;
+    if (newLimit != limit) {
+      const newPage = Math.ceil(((page - 1) * limit + 1) / newLimit);
+      if (newPage != page) {
+        setPage(newPage);
+      }
+      setLimit(newLimit);
+    }
+  }, [windowWidth]);
 
   useEffect(() => {
     if (page != 1) {
@@ -90,7 +106,7 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchArtworks();
-  }, [page]);
+  }, [page, limit]);
 
   return (
     <>

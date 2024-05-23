@@ -11,10 +11,15 @@ const SearchWrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
+  position: relative;
   display: flex;
-  width: 50%;
+  width: 100%;
   align-items: center;
   margin-top: 4rem;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -28,8 +33,8 @@ const SearchInput = styled.input`
 `;
 
 const IconWrapper = styled.div`
-  position: relative;
-  left: -45px;
+  position: absolute;
+  right: 10px;
   z-index: 1;
 `;
 

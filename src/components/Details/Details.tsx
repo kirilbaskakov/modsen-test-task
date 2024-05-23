@@ -8,17 +8,31 @@ import Loader from "../Loader";
 const DetailsWrapper = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
-  gap: 5rem;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    gap: 4rem;
+  }
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
-  width: 30vw;
-`;
+  width: 100%;
 
-const Image = styled.img`
-  height: 50vh;
+  @media (min-width: 768px) {
+    width: 60%;
+  }
+
+  @media (min-width: 1280px) {
+    width: 45%;
+  }
 `;
 
 const FavButtonWrapper = styled.div`
@@ -50,8 +64,13 @@ const Year = styled.span`
 `;
 
 const OverviewWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+  margin-top: 2rem;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+    position: absolute;
+    bottom: 0;
+  }
 `;
 
 const OverviewList = styled.ul`
@@ -97,7 +116,9 @@ const Details = ({ id }: { id: number }) => {
           </ImageWrapper>
           <div>
             <Title>{artwork?.title}</Title>
-            <Author>{artwork?.artist_title}</Author>
+            <Author>
+              {artwork?.artist_title ? artwork?.artist_title : "Unknown"}
+            </Author>
             <Year>
               {artwork?.date_start}-{artwork?.date_end}
             </Year>

@@ -9,7 +9,7 @@ const OtherWorks = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.artic.edu/api/v1/artworks?page=1&limit=9`)
+    fetch(`https://api.artic.edu/api/v1/artworks?page=1&limit=12`)
       .then((response) => response.json())
       .then((data) => {
         setArtworks(data.data);

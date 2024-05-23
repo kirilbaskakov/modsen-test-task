@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import TitledBlock from "../TitledBlock/TitledBlock";
 import CardList from "../CardList/CardList";
 import IArtwork from "../../types/IArtwork";
-import useLocalStorage from "../../hooks/useLocalStorage";
 import Loader from "../Loader";
 import getLocalStorage from "../../utils/getLocalStorage";
 

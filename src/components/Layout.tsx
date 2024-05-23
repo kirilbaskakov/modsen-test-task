@@ -8,6 +8,7 @@ import ScrollToTop from "./ScrollToTop";
 const MainWrapper = styled.div`
   background-color: #fafafa;
   min-height: 100vh;
+  padding: 1rem;
 `;
 
 const Main = styled.main`
