@@ -4,6 +4,7 @@ import FavButton from "../FavButton/FavButton";
 import IArtwork from "../../types/IArtwork";
 import LoadingImage from "../LoadingImage/LoadingImage";
 import Loader from "../Loader";
+import { buildDetailsQuery } from "../../contsants/api";
 
 const DetailsWrapper = styled.div`
   position: relative;
@@ -94,7 +95,7 @@ const Details = ({ id }: { id: number }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
+    fetch(buildDetailsQuery(id))
       .then((response) => response.json())
       .then((data) => {
         setArtwork(data.data);
@@ -127,7 +128,9 @@ const Details = ({ id }: { id: number }) => {
               <Title>Overview</Title>
               <OverviewList>
                 <OverviewItem>
-                  <Hightlighted>Artist nationality:</Hightlighted> German
+                  <Hightlighted>Artist nationality:</Hightlighted>{" "}
+                  {artwork?.artist_display?.split("\n")[1]?.split(",")[0] ??
+                    "Unknown"}
                 </OverviewItem>
                 <OverviewItem>
                   <Hightlighted>Dimensions Sheet:</Hightlighted>{" "}

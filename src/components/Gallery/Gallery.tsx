@@ -3,11 +3,11 @@ import styled from "styled-components";
 import LargeCard from "../LargeCard/LargeCard";
 import TitledBlock from "../TitledBlock/TitledBlock";
 import IArtwork from "../../types/IArtwork";
-import App from "../../App";
 import Loader from "../Loader";
 import Search from "../Search/Search";
 import useDebounce from "../../hooks/useDebounce";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import { buildArtworksQuery, buildSearchQuery } from "../../contsants/api";
 
 const Cards = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ const Gallery = () => {
     windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3
   );
   const search = useDebounce(searchText, 300);
-  let maxPages = 100;
+  const [maxPages, setMaxPages] = useState(100);
 
   const genPages = () => {
     let start = Math.max(1, page - 1);
@@ -71,18 +71,22 @@ const Gallery = () => {
 
   const pages = genPages();
 
-  const fetchArtworks = () => {
+  const fetchArtworks = (): (() => void) => {
+    let controller = new AbortController();
     fetch(
       search
-        ? `https://api.artic.edu/api/v1/artworks/search?q=${search}&page=${page}&limit=${limit}&fields=id,image_id,title,artist_title`
-        : `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}`
+        ? buildSearchQuery(search, page, limit)
+        : buildArtworksQuery({ page, limit }),
+      { signal: controller.signal }
     )
       .then((response) => response.json())
       .then((data) => {
-        maxPages = data.pagination.total_pages;
+        setMaxPages(data.pagination.total_pages);
         setArtworks(data.data);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoading(false))
+      .catch((e) => console.log(e));
+    return () => controller.abort();
   };
 
   useEffect(() => {
@@ -100,12 +104,12 @@ const Gallery = () => {
     if (page != 1) {
       setPage(1);
     } else {
-      fetchArtworks();
+      return fetchArtworks();
     }
   }, [search]);
 
   useEffect(() => {
-    fetchArtworks();
+    return fetchArtworks();
   }, [page, limit]);
 
   return (

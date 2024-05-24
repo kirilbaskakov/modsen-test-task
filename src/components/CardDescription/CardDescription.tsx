@@ -16,31 +16,44 @@ const CardWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 `;
 
 const Text = styled.div`
+  align-self: flex-start;
   width: 70%;
-  text-wrap: nowrap;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  text-align: start;
 `;
 
 const Title = styled.h3`
   margin: 0;
   padding: 0;
+  width: 100%;
   color: #393939;
   font-size: 17px;
   font-weight: 500;
-  text-align: start;
   line-height: 1.75em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
-const Author = styled.h4`
-  margin: 0;
-  padding: 0;
+const Author = styled.span`
   color: #e0a449;
   font-size: 15px;
-  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+const Domain = styled.span`
+  font-size: 15px;
+  font-weight: 700;
+  color: #393939;
+  margin-top: 0.75rem;
 `;
 
 const CardDescription = ({
@@ -67,6 +80,7 @@ const CardDescription = ({
         <Author>
           {artwork.artist_title?.length ? artwork.artist_title : "Unknown"}
         </Author>
+        <Domain>Public</Domain>
       </Text>
       <FavButton id={artwork.id} />
     </CardWrapper>

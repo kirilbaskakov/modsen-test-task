@@ -9,4 +9,5 @@ export default interface IArtwork {
   thumbnnail: {
     alt_text: string;
   };
+  artist_display: string;
 }
