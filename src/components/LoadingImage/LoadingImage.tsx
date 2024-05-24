@@ -14,7 +14,13 @@ const Image = styled.img<{ loading: boolean }>`
   width: 100%;
 `;
 
-const LoadingImage = ({ image_id }: { image_id: string | undefined }) => {
+const LoadingImage = ({
+  image_id,
+  alt,
+}: {
+  image_id: string | undefined;
+  alt?: string;
+}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -22,6 +28,7 @@ const LoadingImage = ({ image_id }: { image_id: string | undefined }) => {
       {isLoading && <Loader />}
       <Image
         src={`https://www.artic.edu/iiif/2/${image_id}/full/600,/0/default.jpg`}
+        alt={alt ?? ""}
         onLoad={() => setIsLoading(false)}
         onError={() => setIsLoading(false)}
         loading={isLoading}

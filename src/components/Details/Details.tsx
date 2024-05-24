@@ -109,7 +109,10 @@ const Details = ({ id }: { id: number }) => {
       ) : (
         <>
           <ImageWrapper>
-            <LoadingImage image_id={artwork?.image_id} />
+            <LoadingImage
+              image_id={artwork?.image_id}
+              alt={artwork?.thumbnnail?.alt_text ?? artwork?.title}
+            />
             <FavButtonWrapper>
               <FavButton id={id} />
             </FavButtonWrapper>
@@ -119,9 +122,7 @@ const Details = ({ id }: { id: number }) => {
             <Author>
               {artwork?.artist_title ? artwork?.artist_title : "Unknown"}
             </Author>
-            <Year>
-              {artwork?.date_start}-{artwork?.date_end}
-            </Year>
+            <Year>{artwork?.date_display}</Year>
             <OverviewWrapper>
               <Title>Overview</Title>
               <OverviewList>

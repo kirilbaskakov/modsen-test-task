@@ -56,7 +56,10 @@ const CardDescription = ({
     <CardWrapper onClick={() => navigate(`/details/${artwork.id}`)}>
       {withImage && (
         <ImageWrapper>
-          <LoadingImage image_id={artwork.image_id} />
+          <LoadingImage
+            image_id={artwork.image_id}
+            alt={artwork?.thumbnnail?.alt_text ?? artwork.title}
+          />
         </ImageWrapper>
       )}
       <Text>

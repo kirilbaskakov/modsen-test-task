@@ -21,7 +21,10 @@ const LargeCard = ({ artwork }: { artwork: IArtwork }) => {
   return (
     <CardWrapper>
       <Link to={`/details/${artwork.id}`}>
-        <LoadingImage image_id={artwork.image_id} />
+        <LoadingImage
+          image_id={artwork.image_id}
+          alt={artwork?.thumbnnail?.alt_text ?? artwork.title}
+        />
       </Link>
       <DescriptionWrapper>
         <CardDescription artwork={artwork} withImage={false} />
