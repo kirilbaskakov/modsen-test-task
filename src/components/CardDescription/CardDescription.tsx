@@ -18,16 +18,18 @@ const CardWrapper = styled.div`
 const ImageWrapper = styled.div`
   width: 90px;
   height: 90px;
+  flex: 0 0 auto;
 `;
 
 const Text = styled.div`
+  flex: 1 0 0;
   align-self: flex-start;
-  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1;
   text-align: start;
+  overflow: hidden;
+  min-width: 0;
 `;
 
 const Title = styled.h3`
@@ -54,6 +56,9 @@ const Domain = styled.span`
   font-weight: 700;
   color: #393939;
   margin-top: 0.75rem;
+`;
+const FavWrapper = styled.div`
+  flex: 0 0 auto;
 `;
 
 const CardDescription = ({
@@ -82,7 +87,9 @@ const CardDescription = ({
         </Author>
         <Domain>Public</Domain>
       </Text>
-      <FavButton id={artwork.id} />
+      <FavWrapper>
+        <FavButton id={artwork.id} />
+      </FavWrapper>
     </CardWrapper>
   );
 };
