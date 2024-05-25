@@ -3,11 +3,12 @@ import styled from "styled-components";
 import LargeCard from "../LargeCard/LargeCard";
 import TitledBlock from "../TitledBlock/TitledBlock";
 import IArtwork from "../../types/IArtwork";
-import Loader from "../Loader";
 import Search from "../Search/Search";
 import useDebounce from "../../hooks/useDebounce";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { buildArtworksQuery, buildSearchQuery } from "../../contsants/api";
+import ErrorBoundary from "../ErrorBoundary";
+import Error from "../Error";
 
 const Cards = styled.div`
   display: flex;
@@ -44,16 +45,25 @@ const PageArrow = styled(Page)`
 `;
 
 const Gallery = () => {
-  const [page, setPage] = useState(1);
-  const [artworks, setArtworks] = useState<IArtwork[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchText, setSearchText] = useState("");
   const windowWidth = useWindowWidth();
   const [limit, setLimit] = useState(
     windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3
   );
+  const [page, setPage] = useState(1);
+  const skeletonArtworks: IArtwork[] = Array(limit)
+    .fill(0)
+    .map((_, id) => ({
+      id,
+      title: "",
+      artist_title: "",
+      thumbnnail: { alt_text: "" },
+      image_id: undefined,
+    }));
+  const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
+  const [searchText, setSearchText] = useState("");
   const search = useDebounce(searchText, 300);
   const [maxPages, setMaxPages] = useState(100);
+  const [isError, setIsError] = useState(false);
 
   const genPages = () => {
     let start = Math.max(1, page - 1);
@@ -72,6 +82,17 @@ const Gallery = () => {
   const pages = genPages();
 
   const fetchArtworks = (): (() => void) => {
+    setArtworks(
+      Array(limit)
+        .fill(0)
+        .map((_, id) => ({
+          id,
+          title: "",
+          artist_title: "",
+          thumbnnail: { alt_text: "" },
+          image_id: undefined,
+        }))
+    );
     let controller = new AbortController();
     fetch(
       search
@@ -84,8 +105,11 @@ const Gallery = () => {
         setMaxPages(data.pagination.total_pages);
         setArtworks(data.data);
       })
-      .finally(() => setIsLoading(false))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        if (e.name != "AbortError") {
+          setIsError(true);
+        }
+      });
     return () => controller.abort();
   };
 
@@ -113,12 +137,12 @@ const Gallery = () => {
   }, [page, limit]);
 
   return (
-    <>
+    <ErrorBoundary>
       <Search searchText={searchText} setSearchText={setSearchText} />
       <TitledBlock title="Our special gallery" subtitle="Topics for you">
-        {isLoading ? (
-          <Loader />
-        ) : (
+        {isError ? (
+          <Error />
+        ) : artworks.length ? (
           <>
             <Cards>
               {artworks.map((artwork) => (
@@ -148,9 +172,14 @@ const Gallery = () => {
               </PageArrow>
             </Pagination>
           </>
+        ) : (
+          <>
+            <h1>No result were found</h1>
+            <h2>We couldn't found what you're searching for</h2>
+          </>
         )}
       </TitledBlock>
-    </>
+    </ErrorBoundary>
   );
 };
 

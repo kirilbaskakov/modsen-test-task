@@ -2,12 +2,12 @@ export default interface IArtwork {
   id: number;
   title: string;
   artist_title: string;
-  date_display: string;
-  credit_line: string;
-  dimensions: string;
-  image_id: string;
+  image_id: string | undefined;
   thumbnnail: {
     alt_text: string;
   };
-  artist_display: string;
+  date_display?: string;
+  credit_line?: string;
+  dimensions?: string;
+  artist_display?: string;
 }

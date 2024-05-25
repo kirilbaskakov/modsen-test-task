@@ -5,6 +5,8 @@ import IArtwork from "../../types/IArtwork";
 import LoadingImage from "../LoadingImage/LoadingImage";
 import Loader from "../Loader";
 import { buildDetailsQuery } from "../../contsants/api";
+import ErrorBoundary from "../ErrorBoundary";
+import Error from "../Error";
 
 const DetailsWrapper = styled.div`
   position: relative;
@@ -93,13 +95,14 @@ const Hightlighted = styled.span`
 const Details = ({ id }: { id: number }) => {
   const [artwork, setArtwork] = useState<IArtwork | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
     fetch(buildDetailsQuery(id))
       .then((response) => response.json())
       .then((data) => {
         setArtwork(data.data);
       })
+      .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, []);
 
@@ -107,8 +110,10 @@ const Details = ({ id }: { id: number }) => {
     <DetailsWrapper>
       {isLoading ? (
         <Loader />
+      ) : isError ? (
+        <Error />
       ) : (
-        <>
+        <ErrorBoundary>
           <ImageWrapper>
             <LoadingImage
               image_id={artwork?.image_id}
@@ -147,7 +152,7 @@ const Details = ({ id }: { id: number }) => {
               </OverviewList>
             </OverviewWrapper>
           </div>
-        </>
+        </ErrorBoundary>
       )}
     </DetailsWrapper>
   );

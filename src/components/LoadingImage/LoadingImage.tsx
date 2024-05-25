@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   width: 100%;
   aspect-ratio: 1;
   position: relative;
+  background-color: rgba(57, 57, 57, 0.05);
 `;
 
 const Image = styled.img<{ loading: boolean }>`
@@ -26,13 +27,15 @@ const LoadingImage = ({
   return (
     <Wrapper>
       {isLoading && <Loader />}
-      <Image
-        src={`https://www.artic.edu/iiif/2/${image_id}/full/600,/0/default.jpg`}
-        alt={alt ?? ""}
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsLoading(false)}
-        loading={isLoading}
-      />
+      {image_id && (
+        <Image
+          src={`https://www.artic.edu/iiif/2/${image_id}/full/600,/0/default.jpg`}
+          alt={alt ?? ""}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
+          loading={isLoading}
+        />
+      )}
     </Wrapper>
   );
 };

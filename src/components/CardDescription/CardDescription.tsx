@@ -13,6 +13,7 @@ const CardWrapper = styled.div`
   background-color: #fff;
   padding: 0.75rem 0.5rem;
   min-width: 0;
+  min-height: 80px;
 `;
 
 const ImageWrapper = styled.div`
@@ -39,7 +40,6 @@ const Title = styled.h3`
   color: #393939;
   font-size: 17px;
   font-weight: 500;
-  line-height: 1.75em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -50,6 +50,8 @@ const Author = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
 `;
 const Domain = styled.span`
   margin-top: auto;
@@ -83,9 +85,7 @@ const CardDescription = ({
       )}
       <Text>
         <Title>{artwork.title}</Title>
-        <Author>
-          {artwork.artist_title?.length ? artwork.artist_title : "Unknown"}
-        </Author>
+        <Author>{artwork.artist_title ?? "Unknown"}</Author>
         <Domain>Public</Domain>
       </Text>
       <FavWrapper>
