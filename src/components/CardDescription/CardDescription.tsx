@@ -16,14 +16,14 @@ const CardWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   flex: 0 0 auto;
 `;
 
 const Text = styled.div`
   flex: 1 0 0;
-  align-self: flex-start;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -52,10 +52,11 @@ const Author = styled.span`
   white-space: nowrap;
 `;
 const Domain = styled.span`
+  margin-top: auto;
+  justify-self: flex-end;
   font-size: 15px;
   font-weight: 700;
   color: #393939;
-  margin-top: 0.75rem;
 `;
 const FavWrapper = styled.div`
   flex: 0 0 auto;
