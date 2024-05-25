@@ -9,6 +9,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import { buildArtworksQuery, buildSearchQuery } from "../../contsants/api";
 import ErrorBoundary from "../ErrorBoundary";
 import Error from "../Error";
+import ISortType from "../../types/ISortType";
 
 const Cards = styled.div`
   display: flex;
@@ -61,6 +62,10 @@ const Gallery = () => {
     }));
   const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
   const [searchText, setSearchText] = useState("");
+  const [sortType, setSortType] = useState<ISortType>({
+    field: undefined,
+    order: "asc",
+  });
   const search = useDebounce(searchText, 300);
   const [maxPages, setMaxPages] = useState(100);
   const [isError, setIsError] = useState(false);
@@ -94,12 +99,9 @@ const Gallery = () => {
         }))
     );
     let controller = new AbortController();
-    fetch(
-      search
-        ? buildSearchQuery(search, page, limit)
-        : buildArtworksQuery({ page, limit }),
-      { signal: controller.signal }
-    )
+    fetch(buildSearchQuery(search, page, limit, sortType), {
+      signal: controller.signal,
+    })
       .then((response) => response.json())
       .then((data) => {
         setMaxPages(data.pagination.total_pages);
@@ -134,11 +136,16 @@ const Gallery = () => {
 
   useEffect(() => {
     return fetchArtworks();
-  }, [page, limit]);
+  }, [page, limit, sortType]);
 
   return (
     <ErrorBoundary>
-      <Search searchText={searchText} setSearchText={setSearchText} />
+      <Search
+        searchText={searchText}
+        setSearchText={setSearchText}
+        sortType={sortType}
+        setSortType={setSortType}
+      />
       <TitledBlock title="Our special gallery" subtitle="Topics for you">
         {isError ? (
           <Error />

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Title from "../Title";
 import Highlighted from "../Highlighted";
 import SearchIcon from "../../assets/search.svg";
+import SortMenu from "../SortMenu/SortMenu";
+import ISortType from "../../types/ISortType";
 
 const SearchWrapper = styled.div`
   display: flex;
@@ -34,18 +36,20 @@ const SearchInput = styled.input`
 
 const IconWrapper = styled.div`
   position: absolute;
-  right: 10px;
+  right: 60px;
   z-index: 1;
 `;
-
-const Icon = styled.img``;
 
 const Search = ({
   searchText,
   setSearchText,
+  sortType,
+  setSortType,
 }: {
   searchText: string;
   setSearchText: Dispatch<SetStateAction<string>>;
+  sortType: ISortType;
+  setSortType: Dispatch<SetStateAction<ISortType>>;
 }) => {
   return (
     <SearchWrapper>
@@ -60,8 +64,9 @@ const Search = ({
           onChange={(e) => setSearchText(e.target.value)}
         />
         <IconWrapper>
-          <Icon src={SearchIcon} />
+          <img src={SearchIcon} />
         </IconWrapper>
+        <SortMenu sortType={sortType} setSortType={setSortType} />
       </InputWrapper>
     </SearchWrapper>
   );
