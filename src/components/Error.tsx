@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ErrorIcon from "../assets/error.svg";
+import ErrorIcon from "#assets/error.svg";
 
 const ErrorWrapper = styled.div`
   width: 100%;

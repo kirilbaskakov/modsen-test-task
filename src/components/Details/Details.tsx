@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import FavButton from "../FavButton/FavButton";
-import IArtwork from "../../types/IArtwork";
-import LoadingImage from "../LoadingImage/LoadingImage";
-import Loader from "../Loader";
-import { buildDetailsQuery } from "../../contsants/api";
-import ErrorBoundary from "../ErrorBoundary";
-import Error from "../Error";
+import FavButton from "#components/FavButton/FavButton";
+import IArtwork from "#types/IArtwork";
+import LoadingImage from "#components/LoadingImage/LoadingImage";
+import Loader from "#components/Loader";
+import { buildDetailsQuery } from "#contsants/api";
+import ErrorBoundary from "#components/ErrorBoundary";
+import Error from "#components/Error";
 
 const DetailsWrapper = styled.div`
   position: relative;

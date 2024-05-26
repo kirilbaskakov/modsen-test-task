@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import CardDescription from "../CardDescription/CardDescription";
-import IArtwork from "../../types/IArtwork";
+import CardDescription from "#components/CardDescription/CardDescription";
+import IArtwork from "#types/IArtwork";
 
 const CardListWrapper = styled.div`
   display: grid;

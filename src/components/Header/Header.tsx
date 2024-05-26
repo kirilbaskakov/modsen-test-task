@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import MuseumLogo from "../../assets/museum-logo.svg";
-import Home from "../../assets/home.svg";
-import Bookmark from "../../assets/bookmark.svg";
+import MuseumLogo from "#assets/museum-logo.svg";
+import Home from "#assets/home.svg";
+import Bookmark from "#assets/bookmark.svg";
 import { Link, NavLink } from "react-router-dom";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
+import BurgerMenu from "#components/BurgerMenu/BurgerMenu";
 
 const HeaderWrapper = styled.header`
   background-color: black;

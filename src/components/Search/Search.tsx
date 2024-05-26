@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import Title from "../Title";
-import Highlighted from "../Highlighted";
-import SearchIcon from "../../assets/search.svg";
-import SortMenu from "../SortMenu/SortMenu";
-import ISortType from "../../types/ISortType";
+import Title from "#components/Title";
+import Highlighted from "#components/Highlighted";
+import SearchIcon from "#assets/search.svg";
+import SortMenu from "#components/SortMenu/SortMenu";
+import ISortType from "#types/ISortType";
 
 const SearchWrapper = styled.div`
   display: flex;

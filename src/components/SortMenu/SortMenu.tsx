@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import SortIcon from "../../assets/sort.svg";
+import { Dispatch, SetStateAction, useState } from "react";
+import SortIcon from "#assets/sort.svg";
 import styled from "styled-components";
-import ISortType from "../../types/ISortType";
+import ISortType from "#types/ISortType";
 
 const SortIconStyled = styled.img`
   width: 40px;

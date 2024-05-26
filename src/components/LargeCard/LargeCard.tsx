@@ -1,9 +1,8 @@
-import React from "react";
-import CardDescription from "../CardDescription/CardDescription";
+import CardDescription from "#components/CardDescription/CardDescription";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import IArtwork from "../../types/IArtwork";
-import LoadingImage from "../LoadingImage/LoadingImage";
+import IArtwork from "#types/IArtwork";
+import LoadingImage from "#components/LoadingImage/LoadingImage";
 
 const CardWrapper = styled.div`
   width: 100%;

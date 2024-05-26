@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
-import Bookmark from "../../assets/bookmark-orange.svg";
-import useInFavorite from "../../hooks/useInFavorite";
+import Bookmark from "#assets/bookmark-orange.svg";
+import useInFavorite from "#hooks/useInFavorite";
 
 const FavButtonStyled = styled.button<{ selected?: boolean }>`
   cursor: pointer;

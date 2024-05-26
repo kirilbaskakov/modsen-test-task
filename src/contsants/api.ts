@@ -1,4 +1,4 @@
-import ISortType from "../types/ISortType";
+import ISortType from "#types/ISortType";
 
 export const API_BASE = "https://api.artic.edu/api/v1";
 

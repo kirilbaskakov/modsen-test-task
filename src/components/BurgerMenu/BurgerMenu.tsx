@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Home from "../../assets/home.svg";
-import Bookmark from "../../assets/bookmark.svg";
+import Home from "#assets/home.svg";
+import Bookmark from "#assets/bookmark.svg";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`

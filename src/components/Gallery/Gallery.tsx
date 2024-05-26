@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import LargeCard from "../LargeCard/LargeCard";
-import TitledBlock from "../TitledBlock/TitledBlock";
-import IArtwork from "../../types/IArtwork";
-import Search from "../Search/Search";
-import useDebounce from "../../hooks/useDebounce";
-import useWindowWidth from "../../hooks/useWindowWidth";
-import { buildArtworksQuery, buildSearchQuery } from "../../contsants/api";
-import ErrorBoundary from "../ErrorBoundary";
-import Error from "../Error";
-import ISortType from "../../types/ISortType";
+import LargeCard from "#components/LargeCard/LargeCard";
+import TitledBlock from "#components/TitledBlock/TitledBlock";
+import IArtwork from "#types/IArtwork";
+import Search from "#components/Search/Search";
+import useDebounce from "#hooks/useDebounce";
+import useWindowWidth from "#hooks/useWindowWidth";
+import { buildSearchQuery } from "#contsants/api";
+import ErrorBoundary from "#components/ErrorBoundary";
+import Error from "#components/Error";
+import ISortType from "#types/ISortType";
 
 const Cards = styled.div`
   display: flex;

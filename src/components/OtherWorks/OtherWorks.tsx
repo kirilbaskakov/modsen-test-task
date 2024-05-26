@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import TitledBlock from "../TitledBlock/TitledBlock";
-import CardList from "../CardList/CardList";
-import IArtwork from "../../types/IArtwork";
-import { buildArtworksQuery } from "../../contsants/api";
-import Error from "../Error";
-import ErrorBoundary from "../ErrorBoundary";
+import { useEffect, useState } from "react";
+import TitledBlock from "#components/TitledBlock/TitledBlock";
+import CardList from "#components/CardList/CardList";
+import IArtwork from "#types/IArtwork";
+import { buildArtworksQuery } from "#contsants/api";
+import Error from "#components/Error";
+import ErrorBoundary from "#components/ErrorBoundary";
 
 const OtherWorks = () => {
   const skeletonArtworks: IArtwork[] = Array(12)

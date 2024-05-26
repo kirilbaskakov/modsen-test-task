@@ -1,9 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import FavButton from "../FavButton/FavButton";
-import IArtwork from "../../types/IArtwork";
-import LoadingImage from "../LoadingImage/LoadingImage";
+import FavButton from "#components/FavButton/FavButton";
+import IArtwork from "#types/IArtwork";
+import LoadingImage from "#components/LoadingImage/LoadingImage";
 
 const CardWrapper = styled.div`
   cursor: pointer;

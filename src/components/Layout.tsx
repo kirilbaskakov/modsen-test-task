@@ -1,9 +1,8 @@
-import React from "react";
-import Header from "./Header/Header";
+import Header from "#components/Header/Header";
 import { Outlet } from "react-router-dom";
-import Footer from "./Footer/Footer";
+import Footer from "#components/Footer/Footer";
 import styled from "styled-components";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "#components/ScrollToTop";
 
 const MainWrapper = styled.div`
   background-color: #fafafa;
