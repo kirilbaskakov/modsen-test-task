@@ -5,13 +5,13 @@ import IArtwork from "#types/IArtwork";
 import Search from "#components/Search/Search";
 import useDebounce from "#hooks/useDebounce";
 import useWindowWidth from "#hooks/useWindowWidth";
-import { buildSearchQuery } from "#utils/buildQuery";
+import { buildSearchQuery } from "#utils/buildQuery/buildQuery";
 import ErrorBoundary from "#components/ErrorBoundary";
 import Error from "#components/Error/Error";
 import ISortType from "#types/ISortType";
 import * as S from "./styled";
 import Pagination from "#components/Pagination/Pagination";
-import generateEmptyArtworks from "#utils/generateEmptyArtworks";
+import generateEmptyArtworks from "#utils/generateEmptyArtworks/generateEmptyArtworks";
 
 const Gallery = () => {
   const windowWidth = useWindowWidth();

@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import generatePages from "#utils/generatePages";
+import generatePages from "#utils/generatePages/generatePages";
 import * as S from "./styled";
 
 const Pagination = ({

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import TitledBlock from "#components/TitledBlock/TitledBlock";
 import CardList from "#components/CardList/CardList";
 import IArtwork from "#types/IArtwork";
-import getLocalStorage from "#utils/getLocalStorage";
-import { buildArtworksQuery } from "#utils/buildQuery";
+import getLocalStorage from "#utils/getLocalStorage/getLocalStorage";
+import { buildArtworksQuery } from "#utils/buildQuery/buildQuery";
 import ErrorBoundary from "#components/ErrorBoundary";
 import Error from "#components/Error/Error";
-import generateEmptyArtworks from "#utils/generateEmptyArtworks";
+import generateEmptyArtworks from "#utils/generateEmptyArtworks/generateEmptyArtworks";
 
 const FavoriteList = () => {
   const favorites = getLocalStorage("favorites", []);

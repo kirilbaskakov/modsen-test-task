@@ -3,7 +3,7 @@ import FavButton from "#components/FavButton/FavButton";
 import IArtwork from "#types/IArtwork";
 import LoadingImage from "#components/LoadingImage/LoadingImage";
 import Loader from "#components/Loader/Loader";
-import { buildDetailsQuery } from "#utils/buildQuery";
+import { buildDetailsQuery } from "#utils/buildQuery/buildQuery";
 import ErrorBoundary from "#components/ErrorBoundary";
 import Error from "#components/Error/Error";
 import * as S from "./styled";
@@ -33,6 +33,7 @@ const Details = ({ id }: { id: number }) => {
           <S.ImageWrapper>
             <LoadingImage
               image_id={artwork?.image_id}
+              size="large"
               alt={artwork?.thumbnnail?.alt_text ?? artwork?.title}
             />
             <S.FavButtonWrapper>

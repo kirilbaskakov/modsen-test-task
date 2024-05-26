@@ -1,4 +1,4 @@
-import { API_BASE, FIELDS_EXTENDED, FIELDS_SHORT } from "#contsants/api";
+import { API_BASE, FIELDS_EXTENDED, FIELDS_SHORT } from "#constants/api";
 import ISortType from "#types/ISortType";
 
 export const buildSearchQuery = (

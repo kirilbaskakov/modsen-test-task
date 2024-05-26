@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import getLocalStorage from "#utils/getLocalStorage";
-import setLocalStorage from "#utils/setLocalStorage";
+import getLocalStorage from "#utils/getLocalStorage/getLocalStorage";
+import setLocalStorage from "#utils/setLocalStorage/setLocalStorage";
 
 const useInFavorite = (id: number): [boolean, () => void] => {
   const checkFavorites = () => {
