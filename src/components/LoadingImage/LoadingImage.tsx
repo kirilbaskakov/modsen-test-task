@@ -4,9 +4,11 @@ import * as S from "./styled";
 
 const LoadingImage = ({
   image_id,
+  size,
   alt,
 }: {
   image_id: string | undefined;
+  size: "small" | "large";
   alt?: string;
 }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +18,9 @@ const LoadingImage = ({
       {isLoading && <Loader />}
       {image_id && (
         <S.Image
-          src={`https://www.artic.edu/iiif/2/${image_id}/full/600,/0/default.jpg`}
+          src={`https://www.artic.edu/iiif/2/${image_id}/full/${
+            size == "small" ? 200 : 600
+          },/0/default.jpg`}
           alt={alt ?? ""}
           onLoad={() => setIsLoading(false)}
           onError={() => setIsLoading(false)}

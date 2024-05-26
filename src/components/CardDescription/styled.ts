@@ -44,6 +44,7 @@ export const Title = styled.h3`
 export const Author = styled.span`
   color: ${theme.colors.highligtedPrimary};
   font-size: ${theme.fs.smaller};
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

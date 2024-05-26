@@ -19,6 +19,7 @@ const CardDescription = ({
         <S.ImageWrapper>
           <LoadingImage
             image_id={artwork.image_id}
+            size="small"
             alt={artwork?.thumbnnail?.alt_text ?? artwork.title}
           />
         </S.ImageWrapper>

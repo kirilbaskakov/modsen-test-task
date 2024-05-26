@@ -10,6 +10,7 @@ const LargeCard = ({ artwork }: { artwork: IArtwork }) => {
       <Link to={`/details/${artwork.id}`}>
         <LoadingImage
           image_id={artwork.image_id}
+          size="large"
           alt={artwork?.thumbnnail?.alt_text ?? artwork.title}
         />
       </Link>
