@@ -18,7 +18,7 @@ export const rotate = keyframes`
 `;
 
 export const LoaderStyled = styled.div`
-  border: 8px solid #f3f3f3;
+  border: 8px solid transparent;
   border-top: 8px solid #3498db;
   border-radius: 50%;
   width: 50px;

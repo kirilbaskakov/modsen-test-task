@@ -12,7 +12,7 @@ const LoadingImage = ({
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <S.Wrapper>
+    <S.Wrapper loading={isLoading}>
       {isLoading && <Loader />}
       {image_id && (
         <S.Image
