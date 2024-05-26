@@ -3,19 +3,17 @@ import TitledBlock from "#components/TitledBlock/TitledBlock";
 import CardList from "#components/CardList/CardList";
 import IArtwork from "#types/IArtwork";
 import getLocalStorage from "#utils/getLocalStorage";
-import { buildArtworksQuery } from "#contsants/api";
+import { buildArtworksQuery } from "#utils/buildQuery";
 import ErrorBoundary from "#components/ErrorBoundary";
-import Error from "#components/Error";
+import Error from "#components/Error/Error";
+import generateEmptyArtworks from "#utils/generateEmptyArtworks";
 
 const FavoriteList = () => {
   const favorites = getLocalStorage("favorites", []);
-  const skeletonArtworks: IArtwork[] = favorites.map((id) => ({
-    id,
-    title: "",
-    artist_title: "",
-    thumbnnail: { alt_text: "" },
-    image_id: undefined,
-  }));
+  const skeletonArtworks: IArtwork[] = generateEmptyArtworks(
+    favorites.length,
+    favorites
+  );
   const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
   const [isError, setIsError] = useState(false);
 

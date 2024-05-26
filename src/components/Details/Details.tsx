@@ -1,96 +1,12 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import FavButton from "#components/FavButton/FavButton";
 import IArtwork from "#types/IArtwork";
 import LoadingImage from "#components/LoadingImage/LoadingImage";
-import Loader from "#components/Loader";
-import { buildDetailsQuery } from "#contsants/api";
+import Loader from "#components/Loader/Loader";
+import { buildDetailsQuery } from "#utils/buildQuery";
 import ErrorBoundary from "#components/ErrorBoundary";
-import Error from "#components/Error";
-
-const DetailsWrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 2rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-
-  @media (min-width: 1280px) {
-    flex-direction: row;
-    gap: 4rem;
-  }
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 60%;
-  }
-
-  @media (min-width: 1280px) {
-    width: 45%;
-  }
-`;
-
-const FavButtonWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 0.75rem;
-`;
-
-const Title = styled.h1`
-  font-size: 32px;
-  color: #393939;
-  margin: 0;
-  font-weight: 400;
-`;
-
-const Author = styled.h2`
-  color: #e0a449;
-  font-size: 24px;
-  margin: 0;
-  margin-top: 1.5rem;
-`;
-
-const Year = styled.span`
-  color: #393939;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 2.5em;
-`;
-
-const OverviewWrapper = styled.div`
-  margin-top: 2rem;
-
-  @media (min-width: 768px) {
-    margin-top: 0;
-    position: absolute;
-    bottom: 0;
-  }
-`;
-
-const OverviewList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  margin-top: 2rem;
-`;
-
-const OverviewItem = styled.li`
-  margin-top: 1rem;
-  font-size: 16px;
-`;
-
-const Hightlighted = styled.span`
-  color: #e0a449;
-`;
+import Error from "#components/Error/Error";
+import * as S from "./styled";
 
 const Details = ({ id }: { id: number }) => {
   const [artwork, setArtwork] = useState<IArtwork | null>(null);
@@ -107,54 +23,54 @@ const Details = ({ id }: { id: number }) => {
   }, []);
 
   return (
-    <DetailsWrapper>
+    <S.DetailsWrapper>
       {isLoading ? (
         <Loader />
       ) : isError ? (
         <Error />
       ) : (
         <ErrorBoundary>
-          <ImageWrapper>
+          <S.ImageWrapper>
             <LoadingImage
               image_id={artwork?.image_id}
               alt={artwork?.thumbnnail?.alt_text ?? artwork?.title}
             />
-            <FavButtonWrapper>
+            <S.FavButtonWrapper>
               <FavButton id={id} />
-            </FavButtonWrapper>
-          </ImageWrapper>
+            </S.FavButtonWrapper>
+          </S.ImageWrapper>
           <div>
-            <Title>{artwork?.title}</Title>
-            <Author>
+            <S.Title>{artwork?.title}</S.Title>
+            <S.Author>
               {artwork?.artist_title ? artwork?.artist_title : "Unknown"}
-            </Author>
-            <Year>{artwork?.date_display}</Year>
-            <OverviewWrapper>
-              <Title>Overview</Title>
-              <OverviewList>
-                <OverviewItem>
-                  <Hightlighted>Artist nationality:</Hightlighted>{" "}
+            </S.Author>
+            <S.Year>{artwork?.date_display}</S.Year>
+            <S.OverviewWrapper>
+              <S.Title>Overview</S.Title>
+              <S.OverviewList>
+                <S.OverviewItem>
+                  <S.Hightlighted>Artist nationality:</S.Hightlighted>{" "}
                   {artwork?.artist_display?.split("\n")[1]?.split(",")[0] ??
                     "Unknown"}
-                </OverviewItem>
-                <OverviewItem>
-                  <Hightlighted>Dimensions Sheet:</Hightlighted>{" "}
+                </S.OverviewItem>
+                <S.OverviewItem>
+                  <S.Hightlighted>Dimensions Sheet:</S.Hightlighted>{" "}
                   {artwork?.dimensions}
-                </OverviewItem>
-                <OverviewItem>
-                  <Hightlighted>Credit Line:</Hightlighted>{" "}
+                </S.OverviewItem>
+                <S.OverviewItem>
+                  <S.Hightlighted>Credit Line:</S.Hightlighted>{" "}
                   {artwork?.credit_line}
-                </OverviewItem>
-                <OverviewItem>
-                  <Hightlighted>Repository:</Hightlighted>{" "}
+                </S.OverviewItem>
+                <S.OverviewItem>
+                  <S.Hightlighted>Repository:</S.Hightlighted>{" "}
                   {artwork?.credit_line}
-                </OverviewItem>
-              </OverviewList>
-            </OverviewWrapper>
+                </S.OverviewItem>
+              </S.OverviewList>
+            </S.OverviewWrapper>
           </div>
         </ErrorBoundary>
       )}
-    </DetailsWrapper>
+    </S.DetailsWrapper>
   );
 };
 

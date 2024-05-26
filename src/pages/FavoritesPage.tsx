@@ -1,4 +1,4 @@
-import FavoriteList from "#components/FavoriteList/FavoriteList";
+import FavoriteList from "#components/FavoriteList";
 import Title from "#components/Title";
 import Highlighted from "#components/Highlighted";
 import BookmarkLarge from "#assets/bookmark-large.svg";

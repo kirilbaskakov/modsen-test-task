@@ -1,5 +1,5 @@
 import Gallery from "#components/Gallery/Gallery";
-import OtherWorks from "#components/OtherWorks/OtherWorks";
+import OtherWorks from "#components/OtherWorks";
 
 const MainPage = () => {
   return (

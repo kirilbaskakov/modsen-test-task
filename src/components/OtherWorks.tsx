@@ -2,21 +2,15 @@ import { useEffect, useState } from "react";
 import TitledBlock from "#components/TitledBlock/TitledBlock";
 import CardList from "#components/CardList/CardList";
 import IArtwork from "#types/IArtwork";
-import { buildArtworksQuery } from "#contsants/api";
-import Error from "#components/Error";
+import { buildArtworksQuery } from "#utils/buildQuery";
+import Error from "#components/Error/Error";
 import ErrorBoundary from "#components/ErrorBoundary";
+import generateEmptyArtworks from "#utils/generateEmptyArtworks";
 
 const OtherWorks = () => {
-  const skeletonArtworks: IArtwork[] = Array(12)
-    .fill(0)
-    .map((_, id) => ({
-      id,
-      title: "",
-      artist_title: "",
-      thumbnnail: { alt_text: "" },
-      image_id: undefined,
-    }));
-  const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
+  const [artworks, setArtworks] = useState<IArtwork[]>(
+    generateEmptyArtworks(12)
+  );
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
