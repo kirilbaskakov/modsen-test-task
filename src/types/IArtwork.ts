@@ -9,5 +9,5 @@ export default interface IArtwork {
   date_display?: string;
   credit_line?: string;
   dimensions?: string;
-  artist_display?: string;
+  place_of_origin?: string;
 }

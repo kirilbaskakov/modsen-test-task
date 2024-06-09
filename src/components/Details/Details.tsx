@@ -50,9 +50,8 @@ const Details = ({ id }: { id: number }) => {
               <S.Title>Overview</S.Title>
               <S.OverviewList>
                 <S.OverviewItem>
-                  <S.Hightlighted>Artist nationality:</S.Hightlighted>{" "}
-                  {artwork?.artist_display?.split("\n")[1]?.split(",")[0] ??
-                    "Unknown"}
+                  <S.Hightlighted>Artist's place of origin:</S.Hightlighted>{" "}
+                  {artwork?.place_of_origin ?? "Unknown"}
                 </S.OverviewItem>
                 <S.OverviewItem>
                   <S.Hightlighted>Dimensions Sheet:</S.Hightlighted>{" "}
@@ -60,10 +59,6 @@ const Details = ({ id }: { id: number }) => {
                 </S.OverviewItem>
                 <S.OverviewItem>
                   <S.Hightlighted>Credit Line:</S.Hightlighted>{" "}
-                  {artwork?.credit_line}
-                </S.OverviewItem>
-                <S.OverviewItem>
-                  <S.Hightlighted>Repository:</S.Hightlighted>{" "}
                   {artwork?.credit_line}
                 </S.OverviewItem>
               </S.OverviewList>
