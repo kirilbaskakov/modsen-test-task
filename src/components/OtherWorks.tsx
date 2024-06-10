@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import TitledBlock from "#components/TitledBlock/TitledBlock";
-import CardList from "#components/CardList/CardList";
-import IArtwork from "#types/IArtwork";
-import { buildArtworksQuery } from "#utils/buildQuery/buildQuery";
-import Error from "#components/Error/Error";
-import ErrorBoundary from "#components/ErrorBoundary";
-import generateEmptyArtworks from "#utils/generateEmptyArtworks/generateEmptyArtworks";
+import { useEffect, useState } from 'react';
+import TitledBlock from '#components/TitledBlock/TitledBlock';
+import CardList from '#components/CardList/CardList';
+import IArtwork from '#types/IArtwork';
+import { buildArtworksQuery } from '#utils/buildQuery/buildQuery';
+import Error from '#components/Error/Error';
+import ErrorBoundary from '#components/ErrorBoundary';
+import generateEmptyArtworks from '#utils/generateEmptyArtworks/generateEmptyArtworks';
 
 const OtherWorks = () => {
   const [artworks, setArtworks] = useState<IArtwork[]>(

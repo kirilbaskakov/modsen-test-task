@@ -1,6 +1,6 @@
-import React from "react";
-import ErrorIcon from "#assets/error.svg";
-import * as S from "./styled";
+import React from 'react';
+import ErrorIcon from '#assets/error.svg';
+import * as S from './styled';
 
 const Error = () => {
   return (

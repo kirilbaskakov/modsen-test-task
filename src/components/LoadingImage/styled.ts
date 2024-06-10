@@ -1,6 +1,6 @@
-import theme from "#theme";
-import styled from "styled-components";
-import Placeholder from "#assets/placeholder.svg";
+import theme from '#theme';
+import styled from 'styled-components';
+import Placeholder from '#assets/placeholder.svg';
 
 export const Wrapper = styled.div<{ loading: boolean }>`
   width: 100%;
@@ -12,11 +12,13 @@ export const Wrapper = styled.div<{ loading: boolean }>`
   background-position: center;
   border: 1px solid
     ${(props) =>
-      props.loading ? theme.colors.highligtedPrimary : "transparent"};
+      props.loading ? theme.colors.highligtedPrimary : 'transparent'};
 `;
 
 export const Image = styled.img<{ loading: boolean }>`
-  display: ${(props) => (props.loading ? "none" : "block")};
-  aspect-ratio: 1;
+  display: ${(props) => (props.loading ? 'none' : 'block')};
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 `;

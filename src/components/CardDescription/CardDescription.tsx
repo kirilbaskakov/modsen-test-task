@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import FavButton from "#components/FavButton/FavButton";
-import IArtwork from "#types/IArtwork";
-import LoadingImage from "#components/LoadingImage/LoadingImage";
-import * as S from "./styled";
+import { useNavigate } from 'react-router-dom';
+import FavButton from '#components/FavButton/FavButton';
+import IArtwork from '#types/IArtwork';
+import LoadingImage from '#components/LoadingImage/LoadingImage';
+import * as S from './styled';
 
 const CardDescription = ({
   artwork,
@@ -13,8 +13,12 @@ const CardDescription = ({
 }) => {
   const navigate = useNavigate();
 
+  const onClick = () => {
+    navigate(`/details/${artwork.id}`);
+  };
+
   return (
-    <S.CardWrapper onClick={() => navigate(`/details/${artwork.id}`)}>
+    <S.CardWrapper onClick={onClick}>
       {withImage && (
         <S.ImageWrapper>
           <LoadingImage
@@ -26,7 +30,7 @@ const CardDescription = ({
       )}
       <S.Text>
         <S.Title>{artwork.title}</S.Title>
-        <S.Author>{artwork.artist_title ?? "Unknown"}</S.Author>
+        <S.Author>{artwork.artist_title ?? 'Unknown'}</S.Author>
         <S.Domain>Public</S.Domain>
       </S.Text>
       <S.FavWrapper>

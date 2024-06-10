@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from "react";
-import getLocalStorage from "#utils/getLocalStorage/getLocalStorage";
-import setLocalStorage from "#utils/setLocalStorage/setLocalStorage";
+import { useEffect, useState } from 'react';
+import getLocalStorage from '#utils/getLocalStorage/getLocalStorage';
+import setLocalStorage from '#utils/setLocalStorage/setLocalStorage';
 
 const useInFavorite = (id: number): [boolean, () => void] => {
   const checkFavorites = () => {
-    const favorites = getLocalStorage<number[]>("favorites", []);
+    const favorites = getLocalStorage<number[]>('favorites', []);
     return favorites.includes(id);
   };
 
   const switchInFavorite = () => {
-    const favorites = getLocalStorage<number[]>("favorites", []);
-    console.log("Switch favorites ", id);
+    const favorites = getLocalStorage<number[]>('favorites', []);
     if (!inFavorite) {
-      setLocalStorage("favorites", [...favorites, id]);
+      setLocalStorage('favorites', [...favorites, id]);
     } else {
       setLocalStorage(
-        "favorites",
-        favorites.filter((i) => i != id)
+        'favorites',
+        favorites.filter((i) => i !== id)
       );
     }
   };
 
   const [inFavorite, setInFavorite] = useState(false);
 
-  window.addEventListener("storage", () => {
+  window.addEventListener('storage', () => {
     const newValue = checkFavorites();
-    if (newValue != inFavorite) {
+    if (newValue !== inFavorite) {
       setInFavorite(newValue);
     }
   });

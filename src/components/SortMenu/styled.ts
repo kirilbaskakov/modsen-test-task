@@ -1,5 +1,5 @@
-import theme from "#theme";
-import styled from "styled-components";
+import theme from '#theme';
+import styled from 'styled-components';
 
 export const SortIconStyled = styled.img`
   width: 40px;
@@ -14,7 +14,7 @@ export const Dropdown = styled.div<{ isOpen: boolean }>`
   right: 0;
   width: 280px;
   overflow: hidden;
-  height: ${(props) => (props.isOpen ? "200px" : "0px")};
+  height: ${(props) => (props.isOpen ? '200px' : '0px')};
   background-color: ${theme.colors.bgDropdown};
   border-radius: 8px;
   z-index: 2;

@@ -1,30 +1,37 @@
-import { useEffect, useState } from "react";
-import LargeCard from "#components/LargeCard/LargeCard";
-import TitledBlock from "#components/TitledBlock/TitledBlock";
-import IArtwork from "#types/IArtwork";
-import Search from "#components/Search/Search";
-import useDebounce from "#hooks/useDebounce";
-import useWindowWidth from "#hooks/useWindowWidth";
-import { buildSearchQuery } from "#utils/buildQuery/buildQuery";
-import ErrorBoundary from "#components/ErrorBoundary";
-import Error from "#components/Error/Error";
-import ISortType from "#types/ISortType";
-import * as S from "./styled";
-import Pagination from "#components/Pagination/Pagination";
-import generateEmptyArtworks from "#utils/generateEmptyArtworks/generateEmptyArtworks";
+import { useEffect, useState } from 'react';
+import LargeCard from '#components/LargeCard/LargeCard';
+import TitledBlock from '#components/TitledBlock/TitledBlock';
+import IArtwork from '#types/IArtwork';
+import Search from '#components/Search/Search';
+import useDebounce from '#hooks/useDebounce';
+import useWindowWidth from '#hooks/useWindowWidth';
+import { buildSearchQuery } from '#utils/buildQuery/buildQuery';
+import ErrorBoundary from '#components/ErrorBoundary';
+import Error from '#components/Error/Error';
+import ISortType from '#types/ISortType';
+import * as S from './styled';
+import Pagination from '#components/Pagination/Pagination';
+import generateEmptyArtworks from '#utils/generateEmptyArtworks/generateEmptyArtworks';
+import {
+  IMAGES_DESKTOP,
+  IMAGES_PHONE,
+  IMAGES_TABLET,
+} from '#constants/gallery';
+import calcNewPage from '#utils/calcNewPage/calcNewPage';
+import responsiveValue from '#utils/responsiveValue/responsiveValue';
 
 const Gallery = () => {
   const windowWidth = useWindowWidth();
   const [limit, setLimit] = useState(
-    windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3
+    responsiveValue(windowWidth, IMAGES_PHONE, IMAGES_TABLET, IMAGES_DESKTOP)
   );
   const skeletonArtworks: IArtwork[] = generateEmptyArtworks(limit);
   const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const search = useDebounce(searchText, 300);
   const [sortType, setSortType] = useState<ISortType>({
     field: undefined,
-    order: "asc",
+    order: 'asc',
   });
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(100);
@@ -32,7 +39,7 @@ const Gallery = () => {
 
   const fetchArtworks = (): (() => void) => {
     setArtworks(generateEmptyArtworks(limit));
-    let controller = new AbortController();
+    const controller = new AbortController();
     fetch(buildSearchQuery(search, page, limit, sortType), {
       signal: controller.signal,
     })
@@ -42,7 +49,7 @@ const Gallery = () => {
         setArtworks(data.data);
       })
       .catch((e) => {
-        if (e.name != "AbortError") {
+        if (e.name !== 'AbortError') {
           setIsError(true);
         }
       });
@@ -50,10 +57,15 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    const newLimit = windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3;
-    if (newLimit != limit) {
-      const newPage = Math.ceil(((page - 1) * limit + 1) / newLimit);
-      if (newPage != page) {
+    const newLimit = responsiveValue(
+      windowWidth,
+      IMAGES_PHONE,
+      IMAGES_TABLET,
+      IMAGES_DESKTOP
+    );
+    if (newLimit !== limit) {
+      const newPage = calcNewPage(page, limit, newLimit);
+      if (newPage !== page) {
         setPage(newPage);
       }
       setLimit(newLimit);
@@ -61,7 +73,7 @@ const Gallery = () => {
   }, [windowWidth]);
 
   useEffect(() => {
-    if (page != 1) {
+    if (page !== 1) {
       setPage(1);
     } else {
       return fetchArtworks();
@@ -75,7 +87,6 @@ const Gallery = () => {
   return (
     <ErrorBoundary>
       <Search
-        searchText={searchText}
         setSearchText={setSearchText}
         sortType={sortType}
         setSortType={setSortType}

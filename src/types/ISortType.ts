@@ -1,6 +1,6 @@
 interface ISortType {
   field: string | undefined;
-  order: "asc" | "desc";
+  order: 'asc' | 'desc';
 }
 
 export default ISortType;

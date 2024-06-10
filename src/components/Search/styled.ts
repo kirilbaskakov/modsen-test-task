@@ -1,10 +1,16 @@
-import theme from "#theme";
-import styled from "styled-components";
+import theme from '#theme';
+import styled from 'styled-components';
 
 export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 50%;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -13,10 +19,6 @@ export const InputWrapper = styled.div`
   width: 100%;
   align-items: center;
   margin-top: 4rem;
-
-  @media (min-width: 768px) {
-    width: 50%;
-  }
 `;
 
 export const SearchInput = styled.input`
@@ -33,4 +35,12 @@ export const IconWrapper = styled.div`
   position: absolute;
   right: 60px;
   z-index: 1;
+`;
+
+export const Error = styled.div`
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  color: ${theme.colors.danger};
+  font-size: ${theme.fs.small};
+  height: ${theme.fs.small};
 `;

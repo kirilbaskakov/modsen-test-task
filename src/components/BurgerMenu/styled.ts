@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import theme from "#theme";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import theme from '#theme';
 
 export const Wrapper = styled.div`
   @media (min-width: 768px) {
@@ -30,7 +30,7 @@ export const Dropdown = styled.div<{ isOpen: boolean }>`
   left: 0;
   width: 100%;
   overflow: hidden;
-  height: ${(props) => (props.isOpen ? "135px" : "0px")};
+  height: ${(props) => (props.isOpen ? '135px' : '0px')};
   background-color: ${theme.colors.bgDropdown};
   z-index: 2;
   transition: 0.2s ease-in;

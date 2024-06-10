@@ -1,30 +1,33 @@
-import { useEffect, useState } from "react";
-import TitledBlock from "#components/TitledBlock/TitledBlock";
-import CardList from "#components/CardList/CardList";
-import IArtwork from "#types/IArtwork";
-import getLocalStorage from "#utils/getLocalStorage/getLocalStorage";
-import { buildArtworksQuery } from "#utils/buildQuery/buildQuery";
-import ErrorBoundary from "#components/ErrorBoundary";
-import Error from "#components/Error/Error";
-import generateEmptyArtworks from "#utils/generateEmptyArtworks/generateEmptyArtworks";
+import { useEffect, useState } from 'react';
+import TitledBlock from '#components/TitledBlock/TitledBlock';
+import CardList from '#components/CardList/CardList';
+import IArtwork from '#types/IArtwork';
+import { buildArtworksQuery } from '#utils/buildQuery/buildQuery';
+import ErrorBoundary from '#components/ErrorBoundary';
+import Error from '#components/Error/Error';
+import generateEmptyArtworks from '#utils/generateEmptyArtworks/generateEmptyArtworks';
+import useFavorites from '#hooks/useFavorites';
 
 const FavoriteList = () => {
-  const favorites = getLocalStorage("favorites", []);
-  const skeletonArtworks: IArtwork[] = generateEmptyArtworks(
-    favorites.length,
-    favorites
+  const favorites = useFavorites();
+  const [artworks, setArtworks] = useState<IArtwork[]>(
+    generateEmptyArtworks(favorites.length, favorites)
   );
-  const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (favorites.length) {
-      fetch(buildArtworksQuery({ ids: favorites.join(", ") }))
+      setArtworks(generateEmptyArtworks(favorites.length, favorites));
+      fetch(buildArtworksQuery({ ids: favorites.join(', ') }))
         .then((response) => response.json())
         .then((data) => setArtworks(data.data))
         .catch(() => setIsError(true));
     }
   }, []);
+
+  useEffect(() => {
+    setArtworks(artworks.filter((artwork) => favorites.includes(artwork.id)));
+  }, [favorites]);
 
   return (
     <TitledBlock title="Your favorites list" subtitle="Saved by you">

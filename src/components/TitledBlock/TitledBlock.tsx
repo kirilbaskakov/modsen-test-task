@@ -1,5 +1,5 @@
-import React from "react";
-import * as S from "./styled";
+import React from 'react';
+import * as S from './styled';
 
 const TitledBlock = ({
   title,
