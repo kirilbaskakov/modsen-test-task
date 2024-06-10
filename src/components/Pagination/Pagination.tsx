@@ -19,7 +19,7 @@ const Pagination = ({
         {'<'}
       </S.PageArrow>
       {pages.map((p) => (
-        <S.Page selected={p === page} onClick={() => setPage(p)}>
+        <S.Page key={p} selected={p === page} onClick={() => setPage(p)}>
           {p}
         </S.Page>
       ))}

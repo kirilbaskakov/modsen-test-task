@@ -1,19 +1,17 @@
-import DetailsPage from '#pages/DetailsPage';
-import FavoritesPage from '#pages/FavoritesPage';
-import MainPage from './pages/MainPage';
+import React from 'react';
 
 const routes = [
   {
     path: '',
-    element: MainPage,
+    element: React.lazy(() => import('#pages/MainPage')),
   },
   {
     path: '/details/:id',
-    element: DetailsPage,
+    element: React.lazy(() => import('#pages/DetailsPage')),
   },
   {
     path: '/favorites',
-    element: FavoritesPage,
+    element: React.lazy(() => import('#pages/FavoritesPage')),
   },
 ];
 

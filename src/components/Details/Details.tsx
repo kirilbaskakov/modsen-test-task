@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import FavButton from "#components/FavButton/FavButton";
-import IArtwork from "#types/IArtwork";
-import LoadingImage from "#components/LoadingImage/LoadingImage";
-import Loader from "#components/Loader/Loader";
-import { buildDetailsQuery } from "#utils/buildQuery/buildQuery";
-import ErrorBoundary from "#components/ErrorBoundary";
-import Error from "#components/Error/Error";
-import * as S from "./styled";
+import React, { useEffect, useState } from 'react';
+import FavButton from '#components/FavButton/FavButton';
+import IArtwork from '#types/IArtwork';
+import LoadingImage from '#components/LoadingImage/LoadingImage';
+import Loader from '#components/Loader/Loader';
+import { buildDetailsQuery } from '#utils/buildQuery/buildQuery';
+import ErrorBoundary from '#components/ErrorBoundary';
+import Error from '#components/Error/Error';
+import * as S from './styled';
 
 const Details = ({ id }: { id: number }) => {
   const [artwork, setArtwork] = useState<IArtwork | null>(null);
@@ -33,7 +33,7 @@ const Details = ({ id }: { id: number }) => {
           <S.ImageWrapper>
             <LoadingImage
               image_id={artwork?.image_id}
-              size="large"
+              size="veryLarge"
               alt={artwork?.thumbnnail?.alt_text ?? artwork?.title}
             />
             <S.FavButtonWrapper>
@@ -43,22 +43,22 @@ const Details = ({ id }: { id: number }) => {
           <div>
             <S.Title>{artwork?.title}</S.Title>
             <S.Author>
-              {artwork?.artist_title ? artwork?.artist_title : "Unknown"}
+              {artwork?.artist_title ? artwork?.artist_title : 'Unknown'}
             </S.Author>
             <S.Year>{artwork?.date_display}</S.Year>
             <S.OverviewWrapper>
               <S.Title>Overview</S.Title>
               <S.OverviewList>
                 <S.OverviewItem>
-                  <S.Hightlighted>Artist's place of origin:</S.Hightlighted>{" "}
-                  {artwork?.place_of_origin ?? "Unknown"}
+                  <S.Hightlighted>Artist's place of origin:</S.Hightlighted>{' '}
+                  {artwork?.place_of_origin ?? 'Unknown'}
                 </S.OverviewItem>
                 <S.OverviewItem>
-                  <S.Hightlighted>Dimensions Sheet:</S.Hightlighted>{" "}
+                  <S.Hightlighted>Dimensions Sheet:</S.Hightlighted>{' '}
                   {artwork?.dimensions}
                 </S.OverviewItem>
                 <S.OverviewItem>
-                  <S.Hightlighted>Credit Line:</S.Hightlighted>{" "}
+                  <S.Hightlighted>Credit Line:</S.Hightlighted>{' '}
                   {artwork?.credit_line}
                 </S.OverviewItem>
               </S.OverviewList>
