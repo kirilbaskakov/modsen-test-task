@@ -10,8 +10,8 @@ import routes from './routes';
 const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Layout />}>
-      {routes.map(({ path, element }) => (
-        <Route path={path} element={element()} />
+      {routes.map((route) => (
+        <Route path={route.path} element={<route.element />} />
       ))}
     </Route>
   )
