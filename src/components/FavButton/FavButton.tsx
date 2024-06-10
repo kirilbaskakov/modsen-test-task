@@ -1,7 +1,7 @@
-import React, { MouseEventHandler } from "react";
-import Bookmark from "#assets/bookmark-orange.svg";
-import useInFavorite from "#hooks/useInFavorite";
-import * as S from "./styled";
+import React, { MouseEventHandler } from 'react';
+import Bookmark from '#assets/bookmark-orange.svg';
+import useInFavorite from '#hooks/useInFavorite';
+import * as S from './styled';
 
 const FavButton = ({ id }: { id: number }) => {
   const [inFavorite, switchInFavorite] = useInFavorite(id);

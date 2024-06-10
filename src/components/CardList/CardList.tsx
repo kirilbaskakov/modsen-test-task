@@ -1,6 +1,6 @@
-import CardDescription from "#components/CardDescription/CardDescription";
-import IArtwork from "#types/IArtwork";
-import * as S from "./styled";
+import CardDescription from '#components/CardDescription/CardDescription';
+import IArtwork from '#types/IArtwork';
+import * as S from './styled';
 
 const CardList = ({ artworks }: { artworks: IArtwork[] }) => {
   return (

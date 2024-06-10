@@ -15,6 +15,10 @@ const LoadingImage = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true);
 
+  const resetIsLoding = () => {
+    setIsLoading(false);
+  };
+
   return (
     <S.Wrapper loading={isLoading}>
       {isLoading && <Loader />}
@@ -22,8 +26,8 @@ const LoadingImage = ({
         <S.Image
           src={`https://www.artic.edu/iiif/2/${image_id}/full/${IMAGE_SIZES[size]},/0/default.jpg`}
           alt={alt ?? ''}
-          onLoad={() => setIsLoading(false)}
-          onError={() => setIsLoading(false)}
+          onLoad={resetIsLoding}
+          onError={resetIsLoding}
           loading={isLoading}
         />
       )}

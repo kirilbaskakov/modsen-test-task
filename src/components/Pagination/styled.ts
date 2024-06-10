@@ -1,5 +1,5 @@
-import theme from "#theme";
-import styled from "styled-components";
+import theme from '#theme';
+import styled from 'styled-components';
 
 export const Pagination = styled.div`
   display: flex;
@@ -16,12 +16,12 @@ export const Page = styled.button<{ selected: boolean }>`
   font-size: ${theme.fs.small};
   font-weight: 600;
   background-color: ${(props) =>
-    props.selected ? theme.colors.hightlightedSecondary : "transparent"};
-  color: ${(props) => (props.selected ? "#fff" : theme.colors.primary)};
+    props.selected ? theme.colors.hightlightedSecondary : 'transparent'};
+  color: ${(props) => (props.selected ? '#fff' : theme.colors.primary)};
 `;
 
 export const PageArrow = styled(Page)`
   margin: 0 0.5rem;
 
-  visibility: ${(props) => (props.selected ? "hidden" : "visible")};
+  visibility: ${(props) => (props.selected ? 'hidden' : 'visible')};
 `;

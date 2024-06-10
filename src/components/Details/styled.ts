@@ -1,5 +1,5 @@
-import theme from "#theme";
-import styled from "styled-components";
+import theme from '#theme';
+import styled from 'styled-components';
 
 export const DetailsWrapper = styled.div`
   position: relative;

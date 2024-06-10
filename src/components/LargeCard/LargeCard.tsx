@@ -1,8 +1,8 @@
-import CardDescription from "#components/CardDescription/CardDescription";
-import { Link } from "react-router-dom";
-import IArtwork from "#types/IArtwork";
-import LoadingImage from "#components/LoadingImage/LoadingImage";
-import * as S from "./styled";
+import CardDescription from '#components/CardDescription/CardDescription';
+import { Link } from 'react-router-dom';
+import IArtwork from '#types/IArtwork';
+import LoadingImage from '#components/LoadingImage/LoadingImage';
+import * as S from './styled';
 
 const LargeCard = ({ artwork }: { artwork: IArtwork }) => {
   return (

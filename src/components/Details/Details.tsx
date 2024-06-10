@@ -12,6 +12,7 @@ const Details = ({ id }: { id: number }) => {
   const [artwork, setArtwork] = useState<IArtwork | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+
   useEffect(() => {
     fetch(buildDetailsQuery(id))
       .then((response) => response.json())
