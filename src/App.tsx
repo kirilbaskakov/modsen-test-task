@@ -3,18 +3,16 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromChildren,
-} from "react-router-dom";
-import Layout from "#components/Layout/Layout";
-import MainPage from "#pages/MainPage";
-import DetailsPage from "#pages/DetailsPage";
-import FavoritesPage from "#pages/FavoritesPage";
+} from 'react-router-dom';
+import Layout from '#components/Layout/Layout';
+import routes from './routes';
 
 const router = createBrowserRouter(
   createRoutesFromChildren(
     <Route path="/" element={<Layout />}>
-      <Route index element={<MainPage />} />
-      <Route path="/details/:id" element={<DetailsPage />} />
-      <Route path="/favorites" element={<FavoritesPage />} />
+      {routes.map(({ path, element }) => (
+        <Route path={path} element={element()} />
+      ))}
     </Route>
   )
 );

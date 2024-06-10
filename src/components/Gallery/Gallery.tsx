@@ -12,11 +12,18 @@ import ISortType from '#types/ISortType';
 import * as S from './styled';
 import Pagination from '#components/Pagination/Pagination';
 import generateEmptyArtworks from '#utils/generateEmptyArtworks/generateEmptyArtworks';
+import {
+  IMAGES_DESKTOP,
+  IMAGES_PHONE,
+  IMAGES_TABLET,
+} from '#constants/gallery';
+import calcNewPage from '#utils/calcNewPage/calcNewPage';
+import responsiveValue from '#utils/responsiveValue/responsiveValue';
 
 const Gallery = () => {
   const windowWidth = useWindowWidth();
   const [limit, setLimit] = useState(
-    windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3
+    responsiveValue(windowWidth, IMAGES_PHONE, IMAGES_TABLET, IMAGES_DESKTOP)
   );
   const skeletonArtworks: IArtwork[] = generateEmptyArtworks(limit);
   const [artworks, setArtworks] = useState<IArtwork[]>(skeletonArtworks);
@@ -50,9 +57,14 @@ const Gallery = () => {
   };
 
   useEffect(() => {
-    const newLimit = windowWidth < 1280 ? (windowWidth < 768 ? 1 : 2) : 3;
+    const newLimit = responsiveValue(
+      windowWidth,
+      IMAGES_PHONE,
+      IMAGES_TABLET,
+      IMAGES_DESKTOP
+    );
     if (newLimit !== limit) {
-      const newPage = Math.ceil(((page - 1) * limit + 1) / newLimit);
+      const newPage = calcNewPage(page, limit, newLimit);
       if (newPage !== page) {
         setPage(newPage);
       }
